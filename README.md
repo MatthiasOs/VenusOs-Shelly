@@ -19,7 +19,7 @@
 ### Automatisch Skript starten
 - Nach einem Neustart lief das Skript im VenusOS welches die Daten vom ShellyPro3EM abfrägt nicht automatisch los
 - mittels `crontab` automatisch bei Neustart das install.sh Skript ausführen (eigentlich müsste man nur den Service starten, aber kA wie das geht, install.sh macht das auch)
-- `crontab -e` &rarr; Zeile `@reboot sh /data/dbus-shelly-pro-3em-smartmeter/install.sh` einfügen und speichern (SRTG +C &rarr; :wq &rarr; ENTER)
+- `crontab -e` &rarr; Zeile `@reboot sh /data/dbus-shelly-pro-3em-smartmeter/install.sh` einfügen und speichern (SRTG+C &rarr; `:wq` &rarr; ENTER)
 ### Zugriff von VRM (Internet) auf das VenusOS im Netzwerk ermöglichen
 - in der `Remote Console`: `Settings` &rarr; `VRM online portal` &rarr; `VRM Portal ID` notieren
 - in [VRM Online](https://vrm.victronenergy.com) einloggen und neue Installation hinzufügen
