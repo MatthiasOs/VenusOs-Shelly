@@ -22,7 +22,31 @@
   - der Shelly Pro3EM ist bereits auf Position 0, dh der Shelly Plus1PM muss auf Position 1 sein, sonst wird das Plus1PM nicht als PV-Inverter angezeigt
   - ganz korrekt ist die Anordnung so nicht, aber besser als das man das Plus1PM überhaupt nicht sieht
   - das ist nötig, weil noch keine Batterie mit Muliplus und dann ESS vorhanden ist, dort kann man dann das Shelly Pro3EM korrekt als Grid hinterlegen, dann muss das **Shelly Plus1PM auf Position 0** gesendet werden!
+
 ![VRM Protal mit Shelly Plus1PM](https://github.com/CommentSectionScientist/VenusOs/blob/main/VRM_mit_1PM.png)
+
+## Speicher + Multiplus Integration
+- BMV + Multiplus mittels Adapter Kabel an VenusOs anschließen
+- Multiplus mittels VEConfigure konfigurieren
+### Problem mit den Phasen
+- Der Speicher ist physisch auf L3 angeschlossen, bei Victron muss es aber immer auf L1 angeschlossen sein
+- Phasen softwaretechnisch im Pro3EM Python Skript ändern L1>L2, L2>L3, L3>L1 
+```
+self._dbusservice['/Ac/L2/Voltage'] = meter_data['em:0']['a_voltage']
+self._dbusservice['/Ac/L3/Voltage'] = meter_data['em:0']['b_voltage']
+self._dbusservice['/Ac/L1/Voltage'] = meter_data['em:0']['c_voltage']
+```
+- Nicht vergessen, im Plus1PM in der Config nun die Phase auf L1 zu ändern, sonst wird dier Erzeugung der PV auf die falsche Phase gerechnet
+  
+![VRM Protal mit Speicher](https://github.com/CommentSectionScientist/VenusOs/blob/main/VRM_mit_Speicher.png)
+
+## OpenWb Ladenstation Integration
+IN ARBEIT!!!
+- Per [angepassten Skript](https://github.com/CommentSectionScientist/dbus-evcharger-openwb) die Daten von OpenWB über mqtt auslesen und dann nach VenusOs schreiben
+- [Paho Mqtt Python](https://github.com/eclipse/paho.mqtt.python)
+- Daten verarbeiten
+- Daten an VenusOs senden
+- ...?
 
 ## Useability
 ### Automatisch Skript starten
