@@ -37,13 +37,13 @@ self._dbusservice['/Ac/L3/Voltage'] = meter_data['em:0']['b_voltage']
 self._dbusservice['/Ac/L1/Voltage'] = meter_data['em:0']['c_voltage']
 ```
 - Nicht vergessen, im Plus1PM in der Config nun die Phase auf L1 zu ändern, sonst wird dier Erzeugung der PV auf die falsche Phase gerechnet
-### Auf L3 wird immer 7 Watt angezeigt
+ 
+![VRM Protal mit Speicher](https://github.com/CommentSectionScientist/VenusOs/blob/main/VRM_mit_Speicher.png)
+### Problem: Auf L3 wird immer 7 Watt angezeigt
 - Manchmal kommt es vor, dass in der Remote Console des VenusOS auf L3 konstant 7W Verbrauch angezeigt wird
 - Woher das kommt, habe ich noch nicht rausgefunden
 - Ein reboot des Shelly Pro3EM behebt das Problem 
-  
-![VRM Protal mit Speicher](https://github.com/CommentSectionScientist/VenusOs/blob/main/VRM_mit_Speicher.png)
-
+ 
 ## OpenWb Ladenstation Integration
 IN ARBEIT!!!
 - Per [angepassten Skript](https://github.com/CommentSectionScientist/dbus-evcharger-openwb) die Daten von OpenWB über mqtt auslesen und dann nach VenusOs schreiben
