@@ -17,13 +17,20 @@
 ![VRM Protal mit Shelly Pro3EM](https://github.com/CommentSectionScientist/VenusOs/blob/main/VRM.png?raw=true)
 
 ## Shelly Plus1PM Integration
+### Node-Red
+- in VenusOS Mqtt aktivieren
+- auf dem Shelly Mqtt aktivieren
+- Shelly als PV-Inverter registrieren: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/SetupShellyPvInverter.json)
+- Daten von Shelly Plus1PM holen & Daten nach VenusOS per mqtt schreiben: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/DataShellyPvInverter.json)
+- benötigte Nodes:
+  - node-red (mqtt)
+  - node-red-contrib-shelly (könnte man theoretisch auch mit plain mqtt von node-red machen)
+### Skirpt (veraltet)
 - [Anleitung & Skript](https://github.com/Halmand/dbus-shelly-1pm-and-pm1-Plus-pvinverter-multi-instance)
 - Der Wert `/Position` muss noch anders gesetzt werden
   - der Shelly Pro3EM ist bereits auf Position 0, dh der Shelly Plus1PM muss auf Position 1 sein, sonst wird das Plus1PM nicht als PV-Inverter angezeigt
   - ganz korrekt ist die Anordnung so nicht, aber besser als das man das Plus1PM überhaupt nicht sieht
   - das ist nötig, weil noch keine Batterie mit Muliplus und dann ESS vorhanden ist, dort kann man dann das Shelly Pro3EM korrekt als Grid hinterlegen, dann muss das **Shelly Plus1PM auf Position 0** gesendet werden!
-
-![VRM Protal mit Shelly Plus1PM](https://github.com/CommentSectionScientist/VenusOs/blob/main/VRM_mit_1PM.png)
 
 ## Speicher + Multiplus Integration
 - BMV + Multiplus mittels Adapter Kabel an VenusOs anschließen
@@ -36,12 +43,13 @@ self._dbusservice['/Ac/L2/Voltage'] = meter_data['em:0']['a_voltage']
 self._dbusservice['/Ac/L3/Voltage'] = meter_data['em:0']['b_voltage']
 self._dbusservice['/Ac/L1/Voltage'] = meter_data['em:0']['c_voltage']
 ```
-- Nicht vergessen, im Plus1PM in der Config nun die Phase auf L1 zu ändern, sonst wird dier Erzeugung der PV auf die falsche Phase gerechnet
+- Nicht vergessen, im Plus1PM in der Config nun die Phase auf L1 zu ändern, sonst wird dier Erzeugung der PV auf die falsche Phase gerechnet (Falls das Skript und nicht Node-Red verwendet wurde!)
  
 ![VRM Protal mit Speicher](https://github.com/CommentSectionScientist/VenusOs/blob/main/VRM_mit_Speicher.png)
  
 ## OpenWb Ladenstation Integration
 IN ARBEIT!!!
+-> TODO: Besser per Node-Red
 - Per [angepassten Skript](https://github.com/CommentSectionScientist/dbus-evcharger-openwb) die Daten von OpenWB über mqtt auslesen und dann nach VenusOs schreiben
 - [Paho Mqtt Python](https://github.com/eclipse/paho.mqtt.python)
 - Daten verarbeiten
