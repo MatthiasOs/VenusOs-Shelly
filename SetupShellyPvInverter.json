@@ -1,0 +1,280 @@
+[
+    {
+        "id": "52222b10dca8c75e",
+        "type": "group",
+        "z": "0fc008f8343fc470",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "d445820e114db912",
+            "aab60364c3d05a4a",
+            "c1e101ef83c0c705",
+            "a1f36ca4e89a0067",
+            "b4a36531702d179b",
+            "627638da4d18cbf4",
+            "c4b6e56faa4d58d9",
+            "ec337e9a0b33b049",
+            "ccdaafb9b85f0eb6",
+            "2d177cbc093122cc",
+            "4e898b8988895197"
+        ],
+        "x": 54,
+        "y": 1179,
+        "w": 1112,
+        "h": 262
+    },
+    {
+        "id": "d445820e114db912",
+        "type": "inject",
+        "z": "0fc008f8343fc470",
+        "g": "52222b10dca8c75e",
+        "name": "Disconnect PV-Inverter from DBUS",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"clientId\":\"fe003\",\"connected\":0,\"version\":\"1.0\",\"services\":{\"pvinverter\":\"pvinverter\"}}",
+        "payloadType": "json",
+        "x": 240,
+        "y": 1360,
+        "wires": [
+            [
+                "aab60364c3d05a4a"
+            ]
+        ]
+    },
+    {
+        "id": "aab60364c3d05a4a",
+        "type": "mqtt out",
+        "z": "0fc008f8343fc470",
+        "g": "52222b10dca8c75e",
+        "name": "",
+        "topic": "device/fe003/Status",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "86834cf8676e9a42",
+        "x": 1050,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "c1e101ef83c0c705",
+        "type": "inject",
+        "z": "0fc008f8343fc470",
+        "g": "52222b10dca8c75e",
+        "name": "PV-Inverter init",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "{\"clientId\":\"fe003\",\"connected\":1,\"version\":\"1.0\",\"services\":{\"pvinverter\":\"pvinverter\"}}",
+        "payloadType": "json",
+        "x": 180,
+        "y": 1320,
+        "wires": [
+            [
+                "aab60364c3d05a4a",
+                "b4a36531702d179b"
+            ]
+        ]
+    },
+    {
+        "id": "a1f36ca4e89a0067",
+        "type": "mqtt out",
+        "z": "0fc008f8343fc470",
+        "g": "52222b10dca8c75e",
+        "name": "",
+        "topic": "",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "86834cf8676e9a42",
+        "x": 1010,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "b4a36531702d179b",
+        "type": "delay",
+        "z": "0fc008f8343fc470",
+        "g": "52222b10dca8c75e",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 460,
+        "y": 1260,
+        "wires": [
+            [
+                "627638da4d18cbf4",
+                "2d177cbc093122cc"
+            ]
+        ]
+    },
+    {
+        "id": "627638da4d18cbf4",
+        "type": "function",
+        "z": "0fc008f8343fc470",
+        "g": "52222b10dca8c75e",
+        "name": "Position",
+        "func": "var payl={value:0}\nportalID = flow.get('portalID')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/pvinverter/3/Position'\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 1240,
+        "wires": [
+            [
+                "a1f36ca4e89a0067"
+            ]
+        ]
+    },
+    {
+        "id": "c4b6e56faa4d58d9",
+        "type": "comment",
+        "z": "0fc008f8343fc470",
+        "g": "52222b10dca8c75e",
+        "name": "mqtt-dbus",
+        "info": "https://github.com/freakent/dbus-mqtt-devices",
+        "x": 160,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "ec337e9a0b33b049",
+        "type": "mqtt in",
+        "z": "0fc008f8343fc470",
+        "g": "52222b10dca8c75e",
+        "name": "",
+        "topic": "device/fe003/DBus",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "86834cf8676e9a42",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 1400,
+        "wires": [
+            [
+                "ccdaafb9b85f0eb6"
+            ]
+        ]
+    },
+    {
+        "id": "ccdaafb9b85f0eb6",
+        "type": "function",
+        "z": "0fc008f8343fc470",
+        "g": "52222b10dca8c75e",
+        "name": "Store PortalID",
+        "func": "flow.set('portalID',msg.payload.portalId);\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 1400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2d177cbc093122cc",
+        "type": "function",
+        "z": "0fc008f8343fc470",
+        "g": "52222b10dca8c75e",
+        "name": "CustomName",
+        "func": "var payl={value:\"EVT 560 (Node Red)\"}\nportalID = flow.get('portalID')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/pvinverter/3/CustomName'\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 1280,
+        "wires": [
+            [
+                "a1f36ca4e89a0067"
+            ]
+        ]
+    },
+    {
+        "id": "4e898b8988895197",
+        "type": "comment",
+        "z": "0fc008f8343fc470",
+        "g": "52222b10dca8c75e",
+        "name": "Setup Shelly PV-Inverter",
+        "info": "",
+        "x": 210,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "86834cf8676e9a42",
+        "type": "mqtt-broker",
+        "name": "VenusOS",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
