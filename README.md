@@ -8,7 +8,7 @@
 - in VenusOS MQTT aktivieren: `Settings > Services > MQTT`
 ## PV Inverter: Shelly Plus1PM Integration (via Node Red)
 - auf dem Shelly MQTT aktivieren: `Settings > MQTT`
-- Shelly als PV-Inverter registrieren: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/SetupShellyPvInverter.json)
+- Shelly als PV-Inverter registrieren: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/SetupShellyPvInverter.json) (DeviceInstance muss ggf angepasst werden)
 - Daten von Shelly Plus1PM holen und Daten nach VenusOS per MQTT schreiben: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/DataShellyPvInverter.json)
 - benötigte Nodes:
   - node-red (mqtt)
@@ -27,7 +27,7 @@
   - falls es keinen Eintrag mit ClassAndVrmInstance zu dem Device gibt, muss dieser angelegt werden:
     - `dbus -y com.victronenergy.settings /Settings/Devices AddSetting mqtt_fe004_grid ClassAndVrmInstance grid:42 s "" ""`
     - bei einem erneuter Aufruf von GetValue (s.u.) sieht man dann ``'mqtt_fe004_grid/ClassAndVrmInstance': 'grid:42',``
-- Shelly als Grid Meter registrieren: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/SetupShellyGridMeter.json)
+- Shelly als Grid Meter registrieren: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/SetupShellyGridMeter.json) (DeviceInstance muss ggf angepasst werden)
 - Daten von Shelly Pro3EM holen und Daten nach VenusOS per MQTT schreiben: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/DataShellyGridMeter.json)
 - benötigte Nodes:
   - node-red (mqtt)
