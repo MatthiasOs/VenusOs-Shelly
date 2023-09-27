@@ -1,8 +1,8 @@
 [
     {
-        "id": "52222b10dca8c75e",
+        "id": "7653d16fcb847184",
         "type": "group",
-        "z": "0fc008f8343fc470",
+        "z": "7091c4f9bb78aba9",
         "style": {
             "stroke": "#999999",
             "stroke-opacity": "1",
@@ -23,18 +23,19 @@
             "ec337e9a0b33b049",
             "ccdaafb9b85f0eb6",
             "2d177cbc093122cc",
-            "4e898b8988895197"
+            "4e898b8988895197",
+            "eaa5d0e6da23efb8"
         ],
-        "x": 54,
-        "y": 1179,
+        "x": 34,
+        "y": 559,
         "w": 1112,
-        "h": 262
+        "h": 282
     },
     {
         "id": "d445820e114db912",
         "type": "inject",
-        "z": "0fc008f8343fc470",
-        "g": "52222b10dca8c75e",
+        "z": "7091c4f9bb78aba9",
+        "g": "7653d16fcb847184",
         "name": "Disconnect PV-Inverter from DBUS",
         "props": [
             {
@@ -48,8 +49,8 @@
         "topic": "",
         "payload": "{\"clientId\":\"fe003\",\"connected\":0,\"version\":\"1.0\",\"services\":{\"pvinverter\":\"pvinverter\"}}",
         "payloadType": "json",
-        "x": 240,
-        "y": 1360,
+        "x": 220,
+        "y": 760,
         "wires": [
             [
                 "aab60364c3d05a4a"
@@ -59,8 +60,8 @@
     {
         "id": "aab60364c3d05a4a",
         "type": "mqtt out",
-        "z": "0fc008f8343fc470",
-        "g": "52222b10dca8c75e",
+        "z": "7091c4f9bb78aba9",
+        "g": "7653d16fcb847184",
         "name": "",
         "topic": "device/fe003/Status",
         "qos": "0",
@@ -71,15 +72,15 @@
         "correl": "",
         "expiry": "",
         "broker": "86834cf8676e9a42",
-        "x": 1050,
-        "y": 1320,
+        "x": 1030,
+        "y": 720,
         "wires": []
     },
     {
         "id": "c1e101ef83c0c705",
         "type": "inject",
-        "z": "0fc008f8343fc470",
-        "g": "52222b10dca8c75e",
+        "z": "7091c4f9bb78aba9",
+        "g": "7653d16fcb847184",
         "name": "PV-Inverter init",
         "props": [
             {
@@ -93,8 +94,8 @@
         "topic": "",
         "payload": "{\"clientId\":\"fe003\",\"connected\":1,\"version\":\"1.0\",\"services\":{\"pvinverter\":\"pvinverter\"}}",
         "payloadType": "json",
-        "x": 180,
-        "y": 1320,
+        "x": 160,
+        "y": 720,
         "wires": [
             [
                 "aab60364c3d05a4a",
@@ -105,8 +106,8 @@
     {
         "id": "a1f36ca4e89a0067",
         "type": "mqtt out",
-        "z": "0fc008f8343fc470",
-        "g": "52222b10dca8c75e",
+        "z": "7091c4f9bb78aba9",
+        "g": "7653d16fcb847184",
         "name": "",
         "topic": "",
         "qos": "0",
@@ -117,15 +118,15 @@
         "correl": "",
         "expiry": "",
         "broker": "86834cf8676e9a42",
-        "x": 1010,
-        "y": 1260,
+        "x": 990,
+        "y": 660,
         "wires": []
     },
     {
         "id": "b4a36531702d179b",
         "type": "delay",
-        "z": "0fc008f8343fc470",
-        "g": "52222b10dca8c75e",
+        "z": "7091c4f9bb78aba9",
+        "g": "7653d16fcb847184",
         "name": "",
         "pauseType": "delay",
         "timeout": "3",
@@ -139,20 +140,21 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 460,
-        "y": 1260,
+        "x": 440,
+        "y": 660,
         "wires": [
             [
                 "627638da4d18cbf4",
-                "2d177cbc093122cc"
+                "2d177cbc093122cc",
+                "eaa5d0e6da23efb8"
             ]
         ]
     },
     {
         "id": "627638da4d18cbf4",
         "type": "function",
-        "z": "0fc008f8343fc470",
-        "g": "52222b10dca8c75e",
+        "z": "7091c4f9bb78aba9",
+        "g": "7653d16fcb847184",
         "name": "Position",
         "func": "var payl={value:0}\nportalID = flow.get('portalID')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/pvinverter/3/Position'\nreturn msg;\n",
         "outputs": 1,
@@ -160,8 +162,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 640,
-        "y": 1240,
+        "x": 620,
+        "y": 640,
         "wires": [
             [
                 "a1f36ca4e89a0067"
@@ -171,19 +173,19 @@
     {
         "id": "c4b6e56faa4d58d9",
         "type": "comment",
-        "z": "0fc008f8343fc470",
-        "g": "52222b10dca8c75e",
+        "z": "7091c4f9bb78aba9",
+        "g": "7653d16fcb847184",
         "name": "mqtt-dbus",
         "info": "https://github.com/freakent/dbus-mqtt-devices",
-        "x": 160,
-        "y": 1280,
+        "x": 140,
+        "y": 680,
         "wires": []
     },
     {
         "id": "ec337e9a0b33b049",
         "type": "mqtt in",
-        "z": "0fc008f8343fc470",
-        "g": "52222b10dca8c75e",
+        "z": "7091c4f9bb78aba9",
+        "g": "7653d16fcb847184",
         "name": "",
         "topic": "device/fe003/DBus",
         "qos": "2",
@@ -193,8 +195,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 190,
-        "y": 1400,
+        "x": 170,
+        "y": 800,
         "wires": [
             [
                 "ccdaafb9b85f0eb6"
@@ -204,8 +206,8 @@
     {
         "id": "ccdaafb9b85f0eb6",
         "type": "function",
-        "z": "0fc008f8343fc470",
-        "g": "52222b10dca8c75e",
+        "z": "7091c4f9bb78aba9",
+        "g": "7653d16fcb847184",
         "name": "Store PortalID",
         "func": "flow.set('portalID',msg.payload.portalId);\n",
         "outputs": 1,
@@ -213,8 +215,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 420,
-        "y": 1400,
+        "x": 400,
+        "y": 800,
         "wires": [
             []
         ]
@@ -222,17 +224,17 @@
     {
         "id": "2d177cbc093122cc",
         "type": "function",
-        "z": "0fc008f8343fc470",
-        "g": "52222b10dca8c75e",
+        "z": "7091c4f9bb78aba9",
+        "g": "7653d16fcb847184",
         "name": "CustomName",
-        "func": "var payl={value:\"EVT 560 (Node Red)\"}\nportalID = flow.get('portalID')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/pvinverter/3/CustomName'\nreturn msg;\n",
+        "func": "var payl={value:\"EVT 560\"}\nportalID = flow.get('portalID')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/pvinverter/3/CustomName'\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 660,
-        "y": 1280,
+        "x": 640,
+        "y": 680,
         "wires": [
             [
                 "a1f36ca4e89a0067"
@@ -242,13 +244,33 @@
     {
         "id": "4e898b8988895197",
         "type": "comment",
-        "z": "0fc008f8343fc470",
-        "g": "52222b10dca8c75e",
-        "name": "Setup Shelly PV-Inverter",
+        "z": "7091c4f9bb78aba9",
+        "g": "7653d16fcb847184",
+        "name": "Setup Shelly Plus1PM PV-Inverter",
         "info": "",
-        "x": 210,
-        "y": 1220,
+        "x": 220,
+        "y": 620,
         "wires": []
+    },
+    {
+        "id": "eaa5d0e6da23efb8",
+        "type": "function",
+        "z": "7091c4f9bb78aba9",
+        "g": "7653d16fcb847184",
+        "name": "ProductId",
+        "func": "var payl={value:0xFFFF}\nportalID = flow.get('portalID')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/pvinverter/3/ProductId'\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 600,
+        "wires": [
+            [
+                "a1f36ca4e89a0067"
+            ]
+        ]
     },
     {
         "id": "86834cf8676e9a42",
