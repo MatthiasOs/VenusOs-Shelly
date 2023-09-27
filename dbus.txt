@@ -1,0 +1,19 @@
+
+dbus -y com.victronenergy.settings / GetValue 
+
+
+# ClassAndVrmInstance: DeviceInstance Setting hinzufügen
+dbus -y com.victronenergy.settings /Settings RemoveSettings '%["Devices/mqtt_fe004_grid/ClassAndVrmInstance"]'
+dbus -y com.victronenergy.settings /Settings/Devices AddSetting mqtt_fe004_grid ClassAndVrmInstance grid:42 s "" ""
+
+#DeviceType
+dbus -y com.victronenergy.settings /Settings RemoveSettings '%["MqttDevices/mqtt_fe004_grid/DeviceType"]'
+dbus -y com.victronenergy.settings /Settings/MqttDevices AddSetting mqtt_fe004_grid DeviceType 345 i "" ""
+
+#Role
+dbus -y com.victronenergy.grid.mqtt_fe004_grid /Settings/MqttDevices AddSetting mqtt_fe004_grid DeviceType 345 i "" ""
+dbus -y com.victronenergy.grid.mqtt_fe004_grid AddSetting Role grid s "" ""
+
+
+'Settings/MqttDevices/mqtt_fe004_grid/Role': 'grid',
+dbus -y com.victronenergy.settings /Settings RemoveSettings '%["MqttDevices/mqtt_fe004_grid/Role"]'
