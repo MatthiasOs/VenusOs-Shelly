@@ -22,6 +22,11 @@
           description: "grid, pvinverter, genset, acload"
           persist: true
           default: "grid"`
+- Falls die DeviceInstance nicht im DBUS bekannt ist, kann man sie manuell anlegen
+  - per SSH auf VenusOS: `dbus -y com.victronenergy.settings /Settings/Devices GetValue`
+  - falls es keinen Eintrag mit ClassAndVrmInstance zu dem Device gibt, muss dieser angelegt werden:
+    - `dbus -y com.victronenergy.settings /Settings/Devices AddSetting mqtt_fe004_grid ClassAndVrmInstance grid:42 s "" ""`
+    - bei einem erneuter Aufruf von GetValue (s.u.) sieht man dann ``'mqtt_fe004_grid/ClassAndVrmInstance': 'grid:42',``
 - Shelly als Grid Meter registrieren: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/SetupShellyGridMeter.json)
 - Daten von Shelly Pro3EM holen und Daten nach VenusOS per MQTT schreiben: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/DataShellyGridMeter.json)
 - benötigte Nodes:
