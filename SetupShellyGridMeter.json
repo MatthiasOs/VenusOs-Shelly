@@ -1,0 +1,388 @@
+[
+    {
+        "id": "b380c9acf4ab4b0b",
+        "type": "group",
+        "z": "fe084e43c511ca8d",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "bc189a8e3c0c1cfc",
+            "eb2dea27a0cf9185",
+            "d254355a0fea4d1e",
+            "980bec3bb3d5ca8d",
+            "d056133420eae4dc",
+            "67adcd53d585e945",
+            "2d67a1c6fe763085",
+            "7777c5e0ec6fc6f2",
+            "420c84aaf973fcbc",
+            "03eab9460ea3a412",
+            "ca0ccbb09d4cad2c",
+            "941f890cc57d3c65",
+            "825b94803e99460f",
+            "fd180f4f6a400766",
+            "139ab1bc457866e5",
+            "0c55aae42bec0a1b"
+        ],
+        "x": 34,
+        "y": 899,
+        "w": 1112,
+        "h": 442
+    },
+    {
+        "id": "bc189a8e3c0c1cfc",
+        "type": "comment",
+        "z": "fe084e43c511ca8d",
+        "g": "b380c9acf4ab4b0b",
+        "name": "Setup Shelly Pro 3EM Smartmeter",
+        "info": "",
+        "x": 220,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "eb2dea27a0cf9185",
+        "type": "inject",
+        "z": "fe084e43c511ca8d",
+        "g": "b380c9acf4ab4b0b",
+        "name": "Disconnect PV-Inverter from DBUS",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"clientId\":\"fe004\",\"connected\":0,\"version\":\"1.0\",\"services\":{\"grid\":\"grid\"}}",
+        "payloadType": "json",
+        "x": 220,
+        "y": 1220,
+        "wires": [
+            [
+                "d254355a0fea4d1e"
+            ]
+        ]
+    },
+    {
+        "id": "d254355a0fea4d1e",
+        "type": "mqtt out",
+        "z": "fe084e43c511ca8d",
+        "g": "b380c9acf4ab4b0b",
+        "name": "",
+        "topic": "device/fe004/Status",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "86834cf8676e9a42",
+        "x": 1030,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "980bec3bb3d5ca8d",
+        "type": "inject",
+        "z": "fe084e43c511ca8d",
+        "g": "b380c9acf4ab4b0b",
+        "name": "Grid Meter init",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "{\"clientId\":\"fe004\",\"connected\":1,\"version\":\"1.0\",\"services\":{\"grid\":\"grid\"}}",
+        "payloadType": "json",
+        "x": 160,
+        "y": 1180,
+        "wires": [
+            [
+                "67adcd53d585e945",
+                "d254355a0fea4d1e"
+            ]
+        ]
+    },
+    {
+        "id": "d056133420eae4dc",
+        "type": "mqtt out",
+        "z": "fe084e43c511ca8d",
+        "g": "b380c9acf4ab4b0b",
+        "name": "",
+        "topic": "",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "86834cf8676e9a42",
+        "x": 990,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "67adcd53d585e945",
+        "type": "delay",
+        "z": "fe084e43c511ca8d",
+        "g": "b380c9acf4ab4b0b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 440,
+        "y": 1120,
+        "wires": [
+            [
+                "ca0ccbb09d4cad2c",
+                "941f890cc57d3c65",
+                "03eab9460ea3a412",
+                "825b94803e99460f",
+                "fd180f4f6a400766",
+                "139ab1bc457866e5"
+            ]
+        ]
+    },
+    {
+        "id": "2d67a1c6fe763085",
+        "type": "comment",
+        "z": "fe084e43c511ca8d",
+        "g": "b380c9acf4ab4b0b",
+        "name": "mqtt-dbus",
+        "info": "https://github.com/freakent/dbus-mqtt-devices",
+        "x": 140,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "7777c5e0ec6fc6f2",
+        "type": "mqtt in",
+        "z": "fe084e43c511ca8d",
+        "g": "b380c9acf4ab4b0b",
+        "name": "",
+        "topic": "device/fe004/DBus",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "86834cf8676e9a42",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 1260,
+        "wires": [
+            [
+                "420c84aaf973fcbc",
+                "0c55aae42bec0a1b"
+            ]
+        ]
+    },
+    {
+        "id": "420c84aaf973fcbc",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "b380c9acf4ab4b0b",
+        "name": "Store PortalID",
+        "func": "flow.set('portalID',msg.payload.portalId);\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 1260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "03eab9460ea3a412",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "b380c9acf4ab4b0b",
+        "name": "CustomName",
+        "func": "var payl={value:\"Grid Meter\"}\nportalID = flow.get('portalID')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/42/CustomName'\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 1140,
+        "wires": [
+            [
+                "d056133420eae4dc"
+            ]
+        ]
+    },
+    {
+        "id": "ca0ccbb09d4cad2c",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "b380c9acf4ab4b0b",
+        "name": "ProductId",
+        "func": "var payl={value:45069}\nportalID = flow.get('portalID')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/42/ProductId'\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 1100,
+        "wires": [
+            [
+                "d056133420eae4dc"
+            ]
+        ]
+    },
+    {
+        "id": "941f890cc57d3c65",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "b380c9acf4ab4b0b",
+        "name": "DeviceType",
+        "func": "var payl={value:345}\nportalID = flow.get('portalID')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/42/DeviceType'\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 1060,
+        "wires": [
+            [
+                "d056133420eae4dc"
+            ]
+        ]
+    },
+    {
+        "id": "825b94803e99460f",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "b380c9acf4ab4b0b",
+        "name": "DeviceInstance",
+        "func": "deviceInstance = flow.get('deviceInstance')\nvar payl={value:deviceInstance}\nportalID = flow.get('portalID')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/42/DeviceInstance'\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 1020,
+        "wires": [
+            [
+                "d056133420eae4dc"
+            ]
+        ]
+    },
+    {
+        "id": "fd180f4f6a400766",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "b380c9acf4ab4b0b",
+        "name": "Role",
+        "func": "var payl={value:\"grid\"}\nportalID = flow.get('portalID')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/42/Role'\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 980,
+        "wires": [
+            [
+                "d056133420eae4dc"
+            ]
+        ]
+    },
+    {
+        "id": "139ab1bc457866e5",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "b380c9acf4ab4b0b",
+        "name": "Serial",
+        "func": "var payl={value:\"C8F09E82E7EC\"}\nportalID = flow.get('portalID')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/42/Serial'\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 940,
+        "wires": [
+            [
+                "d056133420eae4dc"
+            ]
+        ]
+    },
+    {
+        "id": "0c55aae42bec0a1b",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "b380c9acf4ab4b0b",
+        "name": "Store Device Instance",
+        "func": "flow.set('deviceInstance',msg.payload.deviceInstance.grid);",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 1300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "86834cf8676e9a42",
+        "type": "mqtt-broker",
+        "name": "VenusOS",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

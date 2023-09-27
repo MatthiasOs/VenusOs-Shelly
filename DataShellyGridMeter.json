@@ -1,0 +1,1305 @@
+[
+    {
+        "id": "a90aa2783aa910d2",
+        "type": "group",
+        "z": "fe084e43c511ca8d",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "87963ac557bd187d",
+            "c95a13f73cd1b74a",
+            "0cda7195a586410c",
+            "c67e0926cf6de7c6",
+            "bc4aa25368d10ce8",
+            "f7948b4d20185962",
+            "f64b3470c2f2a539",
+            "a98ac6eda9b21b67",
+            "75a23fc71a1c54f1",
+            "8131387e5ffa2e51",
+            "82a248f07b356630",
+            "2231177ea13b4570",
+            "4b80fe606952ad71",
+            "af42a20d02e736f6",
+            "2e6c3c4e73a5cf29",
+            "e7c400dee656579b",
+            "271385c1142f2e29",
+            "bbc3d0b2f0c4cffe",
+            "02bd24de643122d2",
+            "c1341cc79b3bee70",
+            "d7ab1bbe0f067284",
+            "ab4f3e630492b7fe",
+            "ac7cbd0acce564cf",
+            "ca77705f7205fb9c",
+            "91aa849c10b33621",
+            "fe5604dbc7fed01a",
+            "a38a1b031cb093a7",
+            "99d8d04396b9b97a",
+            "dcc2d3fd53ed1ba3",
+            "8d8304ea0a5d750d",
+            "b1336a79c727758c",
+            "5cc7594e6e9746b5",
+            "a4cdf365750dab62",
+            "e628e741ac9c4e20",
+            "a276ead4e796d34c",
+            "2653afb8bf246578",
+            "56dcd83a99d51a50",
+            "d139632e7dd1c69a",
+            "0f766b189ab288c4",
+            "482ac3bd517468cd",
+            "6224da0b059680c4",
+            "60b258ce460955f6",
+            "9e928b966a074980",
+            "6c5a64358227d328",
+            "0aaf0da341dd58a3",
+            "cc1688ca2a745212",
+            "0309c071257fc02f",
+            "92b86165e77747e2",
+            "8de047ee0ff2535e",
+            "9c866bd1517279f5",
+            "cc96ef6ae35431f0"
+        ],
+        "x": 34,
+        "y": 19,
+        "w": 1072,
+        "h": 862
+    },
+    {
+        "id": "87963ac557bd187d",
+        "type": "comment",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "Data Shelly Pro 3EM Smartmeter",
+        "info": "",
+        "x": 210,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "c95a13f73cd1b74a",
+        "type": "shelly-gen2",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "hostname": "192.168.178.4",
+        "description": "Grid Meter",
+        "mode": "polling",
+        "server": "",
+        "outputmode": "event",
+        "uploadretryinterval": 5000,
+        "pollinginterval": "1000",
+        "pollstatus": true,
+        "getstatusoncommand": true,
+        "devicetype": "Measure",
+        "outputs": 1,
+        "x": 290,
+        "y": 160,
+        "wires": [
+            [
+                "c67e0926cf6de7c6",
+                "f7948b4d20185962",
+                "f64b3470c2f2a539",
+                "a98ac6eda9b21b67",
+                "af42a20d02e736f6",
+                "e7c400dee656579b",
+                "ac7cbd0acce564cf",
+                "d7ab1bbe0f067284",
+                "c1341cc79b3bee70",
+                "ca77705f7205fb9c",
+                "dcc2d3fd53ed1ba3",
+                "8d8304ea0a5d750d",
+                "b1336a79c727758c",
+                "a4cdf365750dab62",
+                "56dcd83a99d51a50",
+                "d139632e7dd1c69a",
+                "482ac3bd517468cd",
+                "6c5a64358227d328",
+                "0aaf0da341dd58a3",
+                "0309c071257fc02f",
+                "8de047ee0ff2535e"
+            ]
+        ]
+    },
+    {
+        "id": "0cda7195a586410c",
+        "type": "inject",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 160,
+        "wires": [
+            [
+                "c95a13f73cd1b74a"
+            ]
+        ]
+    },
+    {
+        "id": "c67e0926cf6de7c6",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "current L1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.em0.c_current, 1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 180,
+        "wires": [
+            [
+                "82a248f07b356630"
+            ]
+        ]
+    },
+    {
+        "id": "bc4aa25368d10ce8",
+        "type": "debug",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "Voltage",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "f7948b4d20185962",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "voltage L1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.em0.c_voltage,1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 60,
+        "wires": [
+            [
+                "8131387e5ffa2e51"
+            ]
+        ]
+    },
+    {
+        "id": "f64b3470c2f2a539",
+        "type": "debug",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "All",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 290,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "a98ac6eda9b21b67",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "temp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.temperature0.tC",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 840,
+        "wires": [
+            [
+                "75a23fc71a1c54f1"
+            ]
+        ]
+    },
+    {
+        "id": "75a23fc71a1c54f1",
+        "type": "debug",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "Temperature",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "8131387e5ffa2e51",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "L1/Voltage",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/L1/Voltage'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 60,
+        "wires": [
+            [
+                "bc4aa25368d10ce8",
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "82a248f07b356630",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "L1/Current",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/L1/Current'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 180,
+        "wires": [
+            [
+                "ab4f3e630492b7fe",
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "2231177ea13b4570",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "Current",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/Current'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 660,
+        "wires": [
+            [
+                "4b80fe606952ad71",
+                "cc96ef6ae35431f0"
+            ]
+        ]
+    },
+    {
+        "id": "4b80fe606952ad71",
+        "type": "mqtt out",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "",
+        "topic": "",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "86834cf8676e9a42",
+        "x": 1030,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "af42a20d02e736f6",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "voltage L2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.em0.a_voltage,1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 100,
+        "wires": [
+            [
+                "2e6c3c4e73a5cf29"
+            ]
+        ]
+    },
+    {
+        "id": "2e6c3c4e73a5cf29",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "L2/Voltage",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/L2/Voltage'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 100,
+        "wires": [
+            [
+                "bc4aa25368d10ce8",
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "e7c400dee656579b",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "voltage L3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.em0.b_voltage,1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 140,
+        "wires": [
+            [
+                "271385c1142f2e29"
+            ]
+        ]
+    },
+    {
+        "id": "271385c1142f2e29",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "L3/Voltage",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/L3/Voltage'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 140,
+        "wires": [
+            [
+                "bc4aa25368d10ce8",
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "bbc3d0b2f0c4cffe",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "L2/Current",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/L2/Current'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 220,
+        "wires": [
+            [
+                "ab4f3e630492b7fe",
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "02bd24de643122d2",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "L3/Current",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/L3/Current'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 260,
+        "wires": [
+            [
+                "ab4f3e630492b7fe",
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "c1341cc79b3bee70",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "current L2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.em0.a_current, 1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 220,
+        "wires": [
+            [
+                "bbc3d0b2f0c4cffe"
+            ]
+        ]
+    },
+    {
+        "id": "d7ab1bbe0f067284",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "current L3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.em0.b_current, 1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 260,
+        "wires": [
+            [
+                "02bd24de643122d2"
+            ]
+        ]
+    },
+    {
+        "id": "ab4f3e630492b7fe",
+        "type": "debug",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "Current",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "ac7cbd0acce564cf",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "current",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.em0.total_current, 1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 660,
+        "wires": [
+            [
+                "2231177ea13b4570"
+            ]
+        ]
+    },
+    {
+        "id": "ca77705f7205fb9c",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "power L1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.em0.c_act_power, 1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 300,
+        "wires": [
+            [
+                "91aa849c10b33621"
+            ]
+        ]
+    },
+    {
+        "id": "91aa849c10b33621",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "L1/Power",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/L1/Power'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 300,
+        "wires": [
+            [
+                "5cc7594e6e9746b5",
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "fe5604dbc7fed01a",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "Power",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/Power'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 700,
+        "wires": [
+            [
+                "4b80fe606952ad71",
+                "cc96ef6ae35431f0"
+            ]
+        ]
+    },
+    {
+        "id": "a38a1b031cb093a7",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "L2/Power",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/L2/Power'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 340,
+        "wires": [
+            [
+                "5cc7594e6e9746b5",
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "99d8d04396b9b97a",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "L3/Power",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/L3/Power'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 380,
+        "wires": [
+            [
+                "5cc7594e6e9746b5",
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "dcc2d3fd53ed1ba3",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "power L2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.em0.a_act_power, 1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 340,
+        "wires": [
+            [
+                "a38a1b031cb093a7"
+            ]
+        ]
+    },
+    {
+        "id": "8d8304ea0a5d750d",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "power L3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.em0.b_act_power, 1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 380,
+        "wires": [
+            [
+                "99d8d04396b9b97a"
+            ]
+        ]
+    },
+    {
+        "id": "b1336a79c727758c",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "power",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.em0.total_act_power, 1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 700,
+        "wires": [
+            [
+                "fe5604dbc7fed01a"
+            ]
+        ]
+    },
+    {
+        "id": "5cc7594e6e9746b5",
+        "type": "debug",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "Power",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "a4cdf365750dab62",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "energy forward L1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.emdata0.c_total_act_energy / 1000, 2)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 420,
+        "wires": [
+            [
+                "e628e741ac9c4e20"
+            ]
+        ]
+    },
+    {
+        "id": "e628e741ac9c4e20",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "L1/Energy/Forward",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/L1/Energy/Forward'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 420,
+        "wires": [
+            [
+                "0f766b189ab288c4",
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "a276ead4e796d34c",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "L2/Energy/Forward",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/L2/Energy/Forward'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 460,
+        "wires": [
+            [
+                "0f766b189ab288c4",
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "2653afb8bf246578",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "L3/Energy/Forward",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/L3/Energy/Forward'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 500,
+        "wires": [
+            [
+                "0f766b189ab288c4",
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "56dcd83a99d51a50",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "energy forward L2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.emdata0.a_total_act_energy / 1000, 2)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 460,
+        "wires": [
+            [
+                "a276ead4e796d34c"
+            ]
+        ]
+    },
+    {
+        "id": "d139632e7dd1c69a",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "energy forward L3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.emdata0.b_total_act_energy / 1000, 2)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 500,
+        "wires": [
+            [
+                "2653afb8bf246578"
+            ]
+        ]
+    },
+    {
+        "id": "0f766b189ab288c4",
+        "type": "debug",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "Energy Forward",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "482ac3bd517468cd",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "energy reverse L1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.emdata0.c_total_act_ret_energy / 1000, 2)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 540,
+        "wires": [
+            [
+                "6224da0b059680c4"
+            ]
+        ]
+    },
+    {
+        "id": "6224da0b059680c4",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "L1/Energy/Reverse",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/L1/Energy/Reverse'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 540,
+        "wires": [
+            [
+                "cc1688ca2a745212",
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "60b258ce460955f6",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "L2/Energy/Reverse",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/L2/Energy/Reverse'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 580,
+        "wires": [
+            [
+                "cc1688ca2a745212",
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "9e928b966a074980",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "L3/Energy/Reverse",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/L3/Energy/Reverse'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 620,
+        "wires": [
+            [
+                "cc1688ca2a745212",
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "6c5a64358227d328",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "energy reverse L2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.emdata0.a_total_act_ret_energy / 1000, 2)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 580,
+        "wires": [
+            [
+                "60b258ce460955f6"
+            ]
+        ]
+    },
+    {
+        "id": "0aaf0da341dd58a3",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "energy reverse L3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.emdata0.b_total_act_ret_energy / 1000, 2)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 620,
+        "wires": [
+            [
+                "9e928b966a074980"
+            ]
+        ]
+    },
+    {
+        "id": "cc1688ca2a745212",
+        "type": "debug",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "Energy Reverse",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 980,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "0309c071257fc02f",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "energy forward",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.emdata0.total_act / 1000, 2)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 740,
+        "wires": [
+            [
+                "92b86165e77747e2"
+            ]
+        ]
+    },
+    {
+        "id": "92b86165e77747e2",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "Energy/Forward",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/Energy/Forward'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 740,
+        "wires": [
+            [
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "8de047ee0ff2535e",
+        "type": "change",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "energy reverse",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.emdata0.total_act_ret / 1000, 2)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 780,
+        "wires": [
+            [
+                "9c866bd1517279f5"
+            ]
+        ]
+    },
+    {
+        "id": "9c866bd1517279f5",
+        "type": "function",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "Energy/Reverse",
+        "func": "var payl={value:msg.payload}\nportalID = flow.get('portalID')\ndeviceInstance = flow.get('deviceInstance')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/grid/'+ deviceInstance + '/Ac/Energy/Reverse'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 780,
+        "wires": [
+            [
+                "4b80fe606952ad71"
+            ]
+        ]
+    },
+    {
+        "id": "cc96ef6ae35431f0",
+        "type": "debug",
+        "z": "fe084e43c511ca8d",
+        "g": "a90aa2783aa910d2",
+        "name": "Total",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "86834cf8676e9a42",
+        "type": "mqtt-broker",
+        "name": "VenusOS",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
