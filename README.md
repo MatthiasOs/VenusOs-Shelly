@@ -36,8 +36,8 @@
 ## Dashboard
 ![VRM Protal mit Speicher](https://github.com/CommentSectionScientist/VenusOs/blob/main/VRM_mit_Speicher.png)
  
-## OpenWb Ladenstation Integration per Node Red
-TODO
+## OpenWb Ladenstation Integration per Node Red ([Quelle](https://openwb.de/forum/viewtopic.php?p=85030&sid=4fa25e6eacd715ca001b10b43cc97e54#p85030))
+TODO 
 
 ## Fehlerpotential
 - Die Werte des PV-Inverters und Grid Meters müssen als Zahl(!) und dürfen nicht formatiert als String übermittelt werden, sonst werden die Zahlen von VRM nicht angenommen und das Gerät nicht erkannt (in der Remote Console hingegen wird alles korrekt anzeigt)
