@@ -23,11 +23,12 @@
           description: "grid, pvinverter, genset, acload"
           persist: true
           default: "grid"`
-- Falls die DeviceInstance nicht im DBUS bekannt ist, kann man sie manuell anlegen
-  - per SSH auf VenusOS: `dbus -y com.victronenergy.settings /Settings/Devices GetValue`
+- Falls die DeviceInstance (zB 42) nicht im DBUS bekannt ist, kann man sie manuell anlegen
+  - per SSH auf VenusOS: `dbus -y com.victronenergy.settings /Settings/Devices GetValue` oder über `dbus-spy` suchen
   - falls es keinen Eintrag mit ClassAndVrmInstance zu dem Device gibt, muss dieser angelegt werden:
     - `dbus -y com.victronenergy.settings /Settings/Devices AddSetting mqtt_fe004_grid ClassAndVrmInstance grid:42 s "" ""`
     - bei einem erneuter Aufruf von GetValue (s.u.) sieht man dann ``'mqtt_fe004_grid/ClassAndVrmInstance': 'grid:42',``
+- Reboot
 - Shelly als Grid Meter registrieren: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/SetupShellyGridMeter.json) (DeviceInstance muss ggf angepasst werden)
 - Daten von Shelly holen und Daten nach VenusOS per MQTT schreiben: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/DataShellyGridMeter.json)
 - benötigte Nodes:
@@ -37,7 +38,10 @@
 ![VRM Protal mit Speicher](https://github.com/CommentSectionScientist/VenusOs/blob/main/VRM_mit_Speicher.png)
  
 ## OpenWb Ladenstation Integration per Node Red ([Quelle](https://openwb.de/forum/viewtopic.php?p=85030&sid=4fa25e6eacd715ca001b10b43cc97e54#p85030))
-TODO 
+TODO
+- in der services.yml muss ein Eintrag für den [EV-Charger](https://openwb.de/forum/viewtopic.php?p=85205#p85205) **hinzugefügt** werden, damit der Eintrag im DBUS angelegt werden kann:
+  - `nano /data/drivers/dbus-mqtt-devices-0.6.3/services.yml`: ![services_evcharger.yml](https://github.com/CommentSectionScientist/VenusOs/blob/main/services_evcharger.yml)
+- Reboot
 
 ## Fehlerpotential
 - Die Werte des PV-Inverters und Grid Meters müssen als Zahl(!) und dürfen nicht formatiert als String übermittelt werden, sonst werden die Zahlen von VRM nicht angenommen und das Gerät nicht erkannt (in der Remote Console hingegen wird alles korrekt anzeigt)
