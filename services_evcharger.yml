@@ -1,0 +1,63 @@
+# https://github.com/victronenergy/venus/wiki/dbus#evcharger
+evcharger:
+  ProductId:
+    default: 65535 # 0xFFFF
+  CustomName:
+    default: "MyCharger"
+    persist: true
+  Ac/Energy/Forward:
+    description: "wh"
+    format: "{:.2f}kWh"
+  Ac/L1/Power:
+    description: "W"
+    format: "{} W"
+  Ac/L2/Power:
+    description: "w"
+    format: "{} W"
+  Ac/L3/Power:
+    description: "w"
+    format: "{} W"
+  Ac/Power:
+    description: "w"
+    format: "{} W"
+  AutoStart:
+    description: "w"
+    default: 0
+#    persist: true
+  ChargingTime:
+    description: "in seconds"
+    format: "{} s"
+  Current:
+    description: "A"
+    default: 0
+#    persist: true
+  EnableDisplay:
+    description: ""
+  MaxCurrent:
+    description: "A"
+    default: 0
+#    persist: true   #wird nicht gespeichert reset nach disconnect/reconnect
+  Mode:
+    description: ""
+    default: 0
+  Model:
+    description: "w"
+    default: "AC22NS"
+  Position:
+    persist: true
+    default: 0
+    min: 0
+    max: 1
+    description: "0=OUTPUT; 1=INPUT"
+#  Connected:
+#    description: "w"
+  Role:
+    description: "w"
+  SetCurrent:
+    description: "w"
+#  StartStop:
+#    description: "w"
+#    persist: true
+  Status:
+    description: "w"
+    default: 1
