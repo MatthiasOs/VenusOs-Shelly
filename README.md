@@ -4,8 +4,8 @@
 - auf eine SD Karte flashen (zB mit `balenaEtcher` oder dem `Raspberry Pi Imager`)
 - SSH im VenusOS aktivieren (direkt auch gleich `Remote Zugriff` aktivieren)
 - admin/superuser PW erstellt [Victron Anleitung "Root access"](https://www.victronenergy.com/live/ccgx:root_access)
-- MQTT Treiber installieren: [freakent/dbus-mqtt-devices](https://github.com/freakent/dbus-mqtt-devices)
-  - ggf im [Log kontrollieren](https://github.com/freakent/dbus-mqtt-devices/tree/main#troubleshooting) ob der Treiber korrekt läuft
+- DBus MQTT Treiber installieren: [freakent/dbus-mqtt-devices](https://github.com/freakent/dbus-mqtt-devices)
+  - ggf im [Log kontrollieren](https://github.com/freakent/dbus-mqtt-devices/tree/main#troubleshooting) ob der Treiber korrekt läuft (hier sieht man auch, ob die Geräte die über MQTT Erstellt werden im DBus korrekt angelegt werden können
 - in VenusOS MQTT aktivieren: `Settings > Services > MQTT`
 ## PV Inverter: Shelly Plus 1PM Integration (via Node Red)
 - auf dem Shelly MQTT aktivieren: `Settings > MQTT`
