@@ -1,0 +1,521 @@
+[
+    {
+        "id": "28908042d1d38327",
+        "type": "group",
+        "z": "8fdecdeb81b71d1a",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "e420e324306f563b",
+            "38154a7717fc52b7",
+            "6a01d27bbccd3cf3",
+            "79e9327f1a38d7e6",
+            "7657252e806c9e76",
+            "8979393b44c7c2f2",
+            "21fc6dbf3302bdb6",
+            "3f11b38c63125e05",
+            "6d87f38ef91ab8e9",
+            "89f8684611cb9347",
+            "442a4898c5312edf",
+            "c6a5040802331ed3",
+            "b7914e7c8ffade08",
+            "b81a1a118d92a88a",
+            "d2d2d92363120e7e",
+            "aba77a47a9a01dcd",
+            "61b827a7c8e8828d",
+            "a72d83bbc4d77deb",
+            "fb4f59ff42337453"
+        ],
+        "x": 24,
+        "y": 1339,
+        "w": 1062,
+        "h": 402
+    },
+    {
+        "id": "e420e324306f563b",
+        "type": "inject",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "Disconnect EVCharger 1 from DBUS",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"clientId\":\"fe002\",\"connected\":0,\"version\":\"1.9.x\",\"services\":{\"evcharger\":\"evcharger\"}}",
+        "payloadType": "json",
+        "x": 220,
+        "y": 1480,
+        "wires": [
+            [
+                "7657252e806c9e76",
+                "21fc6dbf3302bdb6"
+            ]
+        ]
+    },
+    {
+        "id": "38154a7717fc52b7",
+        "type": "mqtt in",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "",
+        "topic": "openWB/system/Version",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "3bb8b083f187e5e0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 1600,
+        "wires": [
+            [
+                "442a4898c5312edf"
+            ]
+        ]
+    },
+    {
+        "id": "6a01d27bbccd3cf3",
+        "type": "function",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "build payload and topic",
+        "func": "var payl={\"value\":msg.payload};\nmsg.payload=payl;\nportalID = flow.get('portalID')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/evcharger/41/FirmwareVersion'\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 1600,
+        "wires": [
+            [
+                "79e9327f1a38d7e6",
+                "6d87f38ef91ab8e9",
+                "b7914e7c8ffade08"
+            ]
+        ]
+    },
+    {
+        "id": "79e9327f1a38d7e6",
+        "type": "join",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "4",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 670,
+        "y": 1520,
+        "wires": [
+            [
+                "7657252e806c9e76",
+                "6d87f38ef91ab8e9"
+            ]
+        ]
+    },
+    {
+        "id": "7657252e806c9e76",
+        "type": "mqtt out",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "",
+        "topic": "device/fe002/Status",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "86834cf8676e9a42",
+        "x": 960,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "8979393b44c7c2f2",
+        "type": "comment",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "Device Registration on DBUS",
+        "info": "Setup DBUS device",
+        "x": 180,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "21fc6dbf3302bdb6",
+        "type": "debug",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "EVCharger Init",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 950,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "3f11b38c63125e05",
+        "type": "inject",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "EVCharger init",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "{\"clientId\":\"fe002\",\"connected\":1,\"version\":\"1.9.x\",\"services\":{\"evcharger\":\"evcharger\"}}",
+        "payloadType": "json",
+        "x": 160,
+        "y": 1440,
+        "wires": [
+            [
+                "7657252e806c9e76",
+                "21fc6dbf3302bdb6",
+                "b81a1a118d92a88a"
+            ]
+        ]
+    },
+    {
+        "id": "6d87f38ef91ab8e9",
+        "type": "debug",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "openWB Version",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 950,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "89f8684611cb9347",
+        "type": "inject",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "Resubmit oWB Version",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 12 * * *",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 1540,
+        "wires": [
+            [
+                "c6a5040802331ed3"
+            ]
+        ]
+    },
+    {
+        "id": "442a4898c5312edf",
+        "type": "change",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "oWB_Version",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 1600,
+        "wires": [
+            [
+                "6a01d27bbccd3cf3"
+            ]
+        ]
+    },
+    {
+        "id": "c6a5040802331ed3",
+        "type": "change",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "oWB_Version",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 1540,
+        "wires": [
+            [
+                "6a01d27bbccd3cf3"
+            ]
+        ]
+    },
+    {
+        "id": "b7914e7c8ffade08",
+        "type": "mqtt out",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "",
+        "topic": "",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "86834cf8676e9a42",
+        "x": 920,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "b81a1a118d92a88a",
+        "type": "delay",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 440,
+        "y": 1380,
+        "wires": [
+            [
+                "61b827a7c8e8828d",
+                "fb4f59ff42337453"
+            ]
+        ]
+    },
+    {
+        "id": "d2d2d92363120e7e",
+        "type": "function",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "Store PortalID",
+        "func": "flow.set('portalID',msg.payload.portalId);\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 1660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aba77a47a9a01dcd",
+        "type": "mqtt in",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "",
+        "topic": "device/fe002/DBus",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "86834cf8676e9a42",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 1660,
+        "wires": [
+            [
+                "d2d2d92363120e7e",
+                "a72d83bbc4d77deb"
+            ]
+        ]
+    },
+    {
+        "id": "61b827a7c8e8828d",
+        "type": "function",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "Position",
+        "func": "var payl={value:0}\nportalID = flow.get('portalID')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/evcharger/41/Position'\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 1380,
+        "wires": [
+            [
+                "b7914e7c8ffade08"
+            ]
+        ]
+    },
+    {
+        "id": "a72d83bbc4d77deb",
+        "type": "debug",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "PortalID",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 380,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "fb4f59ff42337453",
+        "type": "function",
+        "z": "8fdecdeb81b71d1a",
+        "g": "28908042d1d38327",
+        "name": "CustomName",
+        "func": "var payl={value:\"OpenWB\"}\nportalID = flow.get('portalID')\nmsg.payload=payl\nmsg.topic='W/' + portalID + '/evcharger/41/CustomName'\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 1420,
+        "wires": [
+            [
+                "b7914e7c8ffade08"
+            ]
+        ]
+    },
+    {
+        "id": "3bb8b083f187e5e0",
+        "type": "mqtt-broker",
+        "name": "openWB",
+        "broker": "192.168.0.84",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "86834cf8676e9a42",
+        "type": "mqtt-broker",
+        "name": "VenusOS",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
