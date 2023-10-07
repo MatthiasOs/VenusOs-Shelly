@@ -11,6 +11,7 @@
 - auf dem Shelly MQTT aktivieren: `Settings > MQTT`
 - Shelly als PV-Inverter registrieren: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/SetupShellyPvInverter.json) (DeviceInstance muss ggf angepasst werden)
 - Daten von Shelly holen und Daten nach VenusOS per MQTT schreiben: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/DataShellyPvInverter.json)
+- DeviceInstance im DBus anpassen, siehe Kapitel "DeviceInstance"
 - benötigte Nodes:
   - node-red (mqtt)
   - node-red-contrib-shelly (könnte man theoretisch auch mit plain mqtt von node-red machen)
@@ -23,26 +24,33 @@
           description: "grid, pvinverter, genset, acload"
           persist: true
           default: "grid"`
-- Falls die DeviceInstance (zB 42) nicht im DBUS bekannt ist, kann man sie manuell anlegen
-  - per SSH auf VenusOS: `dbus -y com.victronenergy.settings /Settings/Devices GetValue` oder über `dbus-spy` suchen
-  - falls es keinen Eintrag mit ClassAndVrmInstance zu dem Device gibt, muss dieser angelegt werden:
-    - `dbus -y com.victronenergy.settings /Settings/Devices AddSetting mqtt_fe004_grid ClassAndVrmInstance grid:42 s "" ""`
-    - bei einem erneuter Aufruf von GetValue (s.u.) sieht man dann ``'mqtt_fe004_grid/ClassAndVrmInstance': 'grid:42',``
+- DeviceInstance im DBus anpassen, siehe Kapitel "DeviceInstance"
 - Reboot
 - Shelly als Grid Meter registrieren: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/SetupShellyGridMeter.json) (DeviceInstance muss ggf angepasst werden)
-- Daten von Shelly holen und Daten nach VenusOS per MQTT schreiben: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/DataShellyGridMeter.json)
+- Daten von Shelly holen und Daten nach VenusOS per MQTT schreiben: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/DataShellyGridMeter.json) (DeviceInstance muss ggf angepasst werden)
 - benötigte Nodes:
   - node-red (mqtt)
   - node-red-contrib-shelly (könnte man theoretisch auch mit plain mqtt von node-red machen)
 ## Dashboard
 ![VRM Protal mit Speicher](https://github.com/CommentSectionScientist/VenusOs/blob/main/VRM_mit_Speicher.png)
  
-## OpenWb Ladenstation Integration per Node Red ([Quelle](https://openwb.de/forum/viewtopic.php?p=85030&sid=4fa25e6eacd715ca001b10b43cc97e54#p85030))
-TODO
+## OpenWB Ladenstation Integration per Node Red ([Quelle](https://openwb.de/forum/viewtopic.php?p=85030&sid=4fa25e6eacd715ca001b10b43cc97e54#p85030))
 - in der services.yml muss ein Eintrag für den [EV-Charger](https://openwb.de/forum/viewtopic.php?p=85205#p85205) **hinzugefügt** werden, damit der Eintrag im DBUS angelegt werden kann:
   - `nano /data/drivers/dbus-mqtt-devices-0.6.3/services.yml`: ![services_evcharger.yml](https://github.com/CommentSectionScientist/VenusOs/blob/main/services_evcharger.yml)
 - Reboot
+- OpenWB als EVCharger registrieren: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/SetupEVCharger.json) (DeviceInstance muss ggf angepasst werden)
+- Daten von OpenWB holen und Daten nach VenusOS per MQTT schreiben: ![Flow](https://github.com/CommentSectionScientist/VenusOs/blob/main/DataEVCharger.json) (DeviceInstance muss ggf angepasst werden)
+- DeviceInstance im DBus anpassen, siehe Kapitel "DeviceInstance"
 
+## DeviceInstance
+- Falls die DeviceInstance (zB 42) nicht im DBUS bekannt ist, kann man sie manuell anlegen
+  - per SSH auf VenusOS: `dbus -y com.victronenergy.settings /Settings/Devices GetValue` oder über `dbus-spy` suchen
+- falls es einen Eintrag mit einer falschen DeviceInstance in dem ClassAndVrmInstance Eintrag gibt, muss diese vorher gelöscht werden:
+  - `dbus -y com.victronenergy.settings /Settings/Devices RemoveSettings '%["mqtt_fe004_pvinverter/ClassAndVrmInstance"]'` (Name des Geräts vor ClassAndVrmInstance anpassen)
+- falls es keinen Eintrag mit ClassAndVrmInstance zu dem Device gibt, muss dieser angelegt werden:
+  - `dbus -y com.victronenergy.settings /Settings/Devices AddSetting mqtt_fe004_grid ClassAndVrmInstance grid:42 s "" ""` (Name des Geräts vor ClassAndVrmInstance anpassen)
+- bei einem erneuter Aufruf von GetValue (s.u.) sieht man dann `'mqtt_fe004_grid/ClassAndVrmInstance': 'grid:42',`
+- 
 ## Fehlerpotential
 - Die Werte des PV-Inverters und Grid Meters müssen als Zahl(!) und dürfen nicht formatiert als String übermittelt werden, sonst werden die Zahlen von VRM nicht angenommen und das Gerät nicht erkannt (in der Remote Console hingegen wird alles korrekt anzeigt)
 
