@@ -53,6 +53,13 @@
 - 
 ## Fehlerpotential
 - Die Werte des PV-Inverters und Grid Meters müssen als Zahl(!) und dürfen nicht formatiert als String übermittelt werden, sonst werden die Zahlen von VRM nicht angenommen und das Gerät nicht erkannt (in der Remote Console hingegen wird alles korrekt anzeigt)
+- `No module named 'yaml'`
+  - dbus Treiber braucht YAML
+  - [Pip3 installieren:](https://community.victronenergy.com/questions/93714/no-pip-in-python.html)
+    - `opkg update`
+    - `opkg list | grep pip`
+    - `opkg install python3-pip`
+  - yaml installieren: `pip3 install pyyaml`
 
 ## Useability
 ### Zugriff von VRM (Internet) auf das VenusOS im Netzwerk ermöglichen
