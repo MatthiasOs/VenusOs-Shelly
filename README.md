@@ -48,9 +48,9 @@
 - falls es einen Eintrag mit einer falschen DeviceInstance in dem ClassAndVrmInstance Eintrag gibt, muss diese vorher gelöscht werden:
   - `dbus -y com.victronenergy.settings /Settings/Devices RemoveSettings '%["mqtt_fe004_pvinverter/ClassAndVrmInstance"]'` (Name des Geräts vor ClassAndVrmInstance anpassen)
 - falls es keinen Eintrag mit ClassAndVrmInstance zu dem Device gibt, muss dieser angelegt werden:
-  - `dbus -y com.victronenergy.settings /Settings/Devices AddSetting mqtt_fe004_grid ClassAndVrmInstance grid:42 s "" ""` (Name des Geräts vor ClassAndVrmInstance anpassen)
+  - `dbus -y com.victronenergy.settings /Settings/Devices AddSetting mqtt_fe004_grid ClassAndVrmInstance grid:42 s "" ""` (Name des Geräts und Service vor ClassAndVrmInstance anpassen)
 - bei einem erneuter Aufruf von GetValue (s.u.) sieht man dann `'mqtt_fe004_grid/ClassAndVrmInstance': 'grid:42',`
-- 
+
 ## Fehlerpotential
 - Die Werte des PV-Inverters und Grid Meters müssen als Zahl(!) und dürfen nicht formatiert als String übermittelt werden, sonst werden die Zahlen von VRM nicht angenommen und das Gerät nicht erkannt (in der Remote Console hingegen wird alles korrekt anzeigt)
 - `No module named 'yaml'`
