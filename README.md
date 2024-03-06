@@ -52,6 +52,8 @@
 - bei einem erneuter Aufruf von GetValue (s.u.) sieht man dann `'mqtt_fe004_grid/ClassAndVrmInstance': 'grid:42',`
 
 ## Fehlerpotential
+- Logs durchsuchen: vorallem `cat /data/log/dbus-mqtt-devices/current` hatte aber auch schon mal Fehler in `cat /data/log/flashmq/current`
+  - Neuste Version des [dbus-mqtt-drivers](https://github.com/freakent/dbus-mqtt-devices/releases/) installieren! 
 - Die Werte des PV-Inverters und Grid Meters müssen als Zahl(!) und dürfen nicht formatiert als String übermittelt werden, sonst werden die Zahlen von VRM nicht angenommen und das Gerät nicht erkannt (in der Remote Console hingegen wird alles korrekt anzeigt)
 - Nach einem Update von VenusOS sieht man im log `cat /data/log/dbus-mqtt-devices/current` sieht man folgenden Fehler: `No module named 'yaml'`
   - dbus Treiber braucht YAML
