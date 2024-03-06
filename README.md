@@ -46,7 +46,7 @@
 - Falls die DeviceInstance (zB 42) nicht im DBUS bekannt ist, kann man sie manuell anlegen
   - per SSH auf VenusOS: `dbus -y com.victronenergy.settings /Settings/Devices GetValue` oder über `dbus-spy` suchen
 - falls es einen Eintrag mit einer falschen DeviceInstance in dem ClassAndVrmInstance Eintrag gibt, muss diese vorher gelöscht werden:
-  - `dbus -y com.victronenergy.settings /Settings/Devices RemoveSettings '%["mqtt_fe004_pvinverter/ClassAndVrmInstance"]'` (Name des Geräts vor ClassAndVrmInstance anpassen)
+  - `dbus -y com.victronenergy.settings /Settings/Devices RemoveSettings '%["mqtt_fe004_grid/ClassAndVrmInstance"]'` (Name des Geräts vor ClassAndVrmInstance anpassen)
 - falls es keinen Eintrag mit ClassAndVrmInstance zu dem Device gibt, muss dieser angelegt werden:
   - `dbus -y com.victronenergy.settings /Settings/Devices AddSetting mqtt_fe004_grid ClassAndVrmInstance grid:42 s "" ""` (Name des Geräts und Service vor ClassAndVrmInstance anpassen)
 - bei einem erneuter Aufruf von GetValue (s.u.) sieht man dann `'mqtt_fe004_grid/ClassAndVrmInstance': 'grid:42',`
